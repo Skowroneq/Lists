@@ -1,0 +1,14 @@
+def delete_the_last_one(head):
+    if head == None:
+        return None
+    
+    if head.next == None:
+        return None
+    
+    last = None
+    curr = head
+    while curr.next:
+        last = curr
+        curr = curr.next
+    last.next = None
+    return head
