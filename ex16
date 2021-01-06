@@ -1,0 +1,23 @@
+def even_amount_of_5(number):
+    amount = 0
+    while number > 0:
+        if number % 8 == 5:
+            amount += 1
+        number //= 8
+    return amount % 2 == 0
+
+def move_at_front_these_which_have_evenamountoffive_in_eight(head):
+    prev = None
+    current = head
+    while current:
+        if even_amount_of_5(current.data):
+            temp = current
+            current = current.next
+            prev.next = current
+            temp.next = head
+            head = temp
+        else:
+            prev = current
+            current = current.next
+            
+    return head
