@@ -1,0 +1,23 @@
+def z19(head):
+    count = 0
+
+    if head == None:
+        return count
+
+    if head.next == None:
+        return count
+    # I'll be using hash table or python's dictionary
+    elements = {}
+    curr = head
+    prev = None
+    while curr:
+        if curr.data in elements:
+            prev.next = curr.next
+            curr = prev.next
+            count += 1
+        else:
+            elements[curr.data] = 1
+            prev = curr
+            curr = curr.next
+
+    return count
