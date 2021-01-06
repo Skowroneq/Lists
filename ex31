@@ -1,0 +1,45 @@
+class Node():
+    def __init__(self, data=None):
+        self.next = None
+        self.data = data
+
+def add(head, key):
+    new_node = Node(key)
+    new_node.next = head
+    new_head = new_node
+    return new_head
+
+def ex31(head_1, head_2, head_3):
+    counter = 0
+    prev_1 = None
+    curr_1 = head_1
+    while curr_1:
+
+        changed = False
+
+        if (curr_1.data > 0 and curr_1.data % 2 == 1) or (
+                curr_1.data < 0 and curr_1.data % 2 == 0):  # Nieparzysta dodatania or Parzysta ujemne
+            counter += 1
+
+            if prev_1 == None:
+                head_1 = curr_1.next
+                curr_1 = head_1
+                changed = True
+
+            else:
+                prev_1.next = curr_1.next
+                curr_1 = prev_1.next
+                changed = True
+
+        elif curr_1.data > 0 and curr_1.data % 2 == 0:  # Parzysta dodatnia
+            head_2 = add(head_2, curr_1.data)
+
+        else:  # Nieparzysta ujemna
+            head_3 = add(head_3, curr_1.data)
+
+        if not changed:
+            prev_1 = curr_1
+            curr_1 = curr_1.next
+
+    return 'Liczba usunietych elementow:', counter
+
