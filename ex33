@@ -1,0 +1,65 @@
+class Node:
+    def __init__(self, val=None):
+        self.val = val
+        self.next = None
+
+class circularLinkedList:
+    def __init__(self):
+        self.head = None
+
+def writeCycle(head):
+    cur = head
+    while cur:
+        print(cur.val,end=' ')
+        cur = cur.next
+        if cur == head:
+            break
+
+def if_can(cp, cp2):
+    if ord(cp.val[-1]) < ord(cp2.val[0]):
+        return True
+    return False
+
+
+def insert(head, string):
+    if head == None:
+        cp_val = Node(string)
+        head = cp_val
+        head.next = head
+        print('True')
+        return head
+        
+    if head.next == head:
+        cp_val = Node(string)
+        if if_can(cp_val, head):
+            cp_val.next = head
+            head.next = cp_val
+            head = cp_val
+            print('True')
+            return head
+        else:
+            head.next = cp_val
+            cp_val.next = head
+            head = cp_val
+            print('True')
+            return head
+            
+    cp_val = Node(string)
+    cp, cp2 = head, head.next
+    while head != cp:
+        if if_can(cp.val, cp2) and if_can(cp, cp.val):
+            cp.next = cp_val
+            cp_val.next = cp2
+            head = cp_val
+            print('True')
+            return head
+        cp, cp2 = cp2, cp2.next
+        
+    if if_can(cp_val, cp2) and if_can(cp, cp_val):
+        cp.next = cp_val
+        cp_val.next = cp2
+        head = cp_val
+        print('True')
+        return head
+        
+    return False
