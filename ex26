@@ -1,0 +1,12 @@
+def is_inside(p1,p2):
+    while p1:
+        while p2:
+            if p1.data == p2.data:
+                while p1 and p2 and p1.data == p2.data:
+                    p1 = p1.next
+                    p2 = p2.next
+                if p1 == None or p2 == None:
+                    return True
+            p2 = p2.next
+        p1 = p1.next
+    return False
