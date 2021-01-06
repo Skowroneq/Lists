@@ -1,0 +1,27 @@
+class Node():
+    def __init__(self, value=None):
+        self.value = value
+        self.next = None
+
+
+def delete(head, key):
+    curr = head
+    prev = None
+    while curr:
+        if curr.value == key:
+            if curr == head:
+                if curr.next:
+                    return curr.next
+                else:
+                    return None
+            else:
+                prev.next = curr.next
+                return head
+        prev = curr
+        curr = curr.next
+
+    if curr == None:  # Does not exist we need to add him
+        new_node = Node(key)
+        new_node.next = head
+        head = new_node
+        return head
