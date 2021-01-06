@@ -1,0 +1,15 @@
+class Node():
+    def __init__(self, value=None):
+        self.value = value
+        self.next = None
+
+def append(head, value):
+    new_node = Node(value)
+    if head == None:
+        head = new_node
+    else:
+        curr = head
+        while curr.next:
+            curr = curr.next
+        curr.next = new_node
+    return head
