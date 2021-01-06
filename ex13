@@ -1,0 +1,18 @@
+def remove_if_before_is_greater(head):
+    
+    if head == None:
+        return head
+    if head.next == None:
+        return head
+
+    prev = head
+    current = head.next
+    while current:
+        if prev.data > current.data:
+            current = current.next
+            prev.next = current
+        else:
+            prev = current
+            current = current.next
+            
+    return head
