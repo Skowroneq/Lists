@@ -1,0 +1,42 @@
+class Node():
+    def __init__(self, value=None):
+        self.value = value
+        self.next = None
+
+def nine(head, curr):
+    
+    def recursion(head, curr, remember):
+        if curr.data != 9:
+            curr.data = curr.data + 1
+            return head
+        elif curr == head:
+            if curr.data == 9:
+                curr.data = 0
+                new_node = Node(1)
+                new_node.next = curr
+                head = new_node
+                return head
+            else:
+                curr.data = curr.data + 1
+                return head
+        else:
+            curr.data = 0
+            curr = head
+            while curr.next != remember:
+                curr = curr.next
+            recursion(head, curr, curr)
+
+    recursion(head, curr, curr)
+    return head
+
+def increment_by_one(head):
+    curr = head
+    while curr.next:
+        curr = curr.next
+        
+    if curr.data < 9:
+        curr.data += 1
+        return head
+        
+    else:  # [1]->[2]->[9]->[9]->[9]-> None
+        return nine(head, curr)
