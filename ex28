@@ -1,0 +1,32 @@
+def is_in(head_1, key):
+    prev_1 = None
+    curr_1 = head_1
+    while curr_1 and curr_1.data < key:
+        prev_1 = curr_1
+        curr_1 = curr_1.next
+    if curr_1.data == key:
+        if prev_1 == None:
+            head_1 = curr_1.next
+        else:
+            prev_1.next = curr_1.next
+        return True
+    else:
+        return False
+
+def remove_duplicates(head_1, head_2):  # head_1 is sorted list
+    counter = 0
+    prev_2 = None
+    curr_2 = head_2
+    while curr_2:
+        if is_in(head_1, curr_2.data):
+            counter += 2
+            if prev_2 == None:
+                head_2 = curr_2.next
+                curr_2 = head_2
+            else:
+                prev_2.next = curr_2.next
+                curr_2 = prev_2.next
+        else:
+            prev_2 = curr_2
+            curr_2 = curr_2.next
+    return counter
