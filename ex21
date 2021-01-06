@@ -1,0 +1,45 @@
+class Node():
+    def __init__(self, data=None):
+        self.next = None
+        self.data = data
+
+
+def remove_increasing_list(head):
+    max_length = [0, 0]  # [0]-dlugosc , [1]-ilosc wystapien
+    pointers = [None, None]  # In order to keep in mind which should I remove
+    last = None
+    curr = head
+    while curr:
+        last_tmp = curr
+        curr_tmp = curr.next
+        if curr_tmp != None:
+            if curr_tmp.data > last_tmp.data:
+                length = 2
+                while curr_tmp:
+                    last_tmp = curr_tmp
+                    curr_tmp = curr_tmp.next
+                    if curr_tmp != None and curr_tmp.data > last_tmp.data:
+                        length += 1
+                    else:
+                        break
+                if length > max_length[0]:
+                    max_length = [length, 1]
+                    pointers = [last, curr_tmp]
+
+                elif max_length[1] != 0 and length == max_length[0]:
+                    max_length[1] = max_length[1] + 1
+
+        last = last_tmp
+        curr = curr_tmp
+
+    if max_length[1] == 1 and max_length[0] != 0:
+        last = pointers[0]
+        curr = pointers[1]
+        if last == None:
+            head = curr
+            return head
+        else:
+            last.next = curr
+            return head
+    else:
+        return head
