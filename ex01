@@ -1,0 +1,40 @@
+# Z1
+
+class Node:
+    def __init__(self, val):
+        self.value = val
+        self.next = None
+
+
+def is_in_list(first, val):
+    while first != None and first.value < val:
+        first = first.next
+
+    return (first != None) and first.value == val
+
+
+def is_in_list_rec(first, val):
+    if first == None:
+        return False
+
+    return first.value == val or is_in_list(first.next, val)
+
+
+def insert(first, val):  # Zwracamy wskazanie na start!!!!!!
+    p.prev = None
+    p = first
+
+    while p != None and p.value < val:
+        p.prev, p = p, p.next
+
+    if p != None and p.value == val:
+        return first
+
+    r = Node(val)
+    if p.prev == None:
+        r.next = p
+        return r
+
+    p.prev.next = r
+    r.next = p
+    return first
