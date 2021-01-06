@@ -1,0 +1,21 @@
+def remove_duplicates(head):
+    if head == None:
+        return head
+
+    if head.next == None:
+        return head
+        
+    # I'll be using hash table or python's dictionary
+    elements = {}
+    curr = head
+    prev = None
+    while curr:
+        if curr.data in elements:
+            prev.next = curr.next
+            curr = prev.next
+        else:
+            elements[curr.data] = 1
+            prev = curr
+            curr = curr.next
+
+    return head
