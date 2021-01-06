@@ -1,0 +1,22 @@
+def delete_everytwo(head):
+
+    if head.next == None:
+        return head
+        
+    new_head = head.next
+    head = head.next
+    current = head.next
+    prev = head
+    
+    while current:
+        prev.next = current.next
+        if current.next:
+            prev = current.next
+            if prev.next:
+                current = prev.next
+            else:
+                return head
+        else:
+            return head
+            
+    return new_head
