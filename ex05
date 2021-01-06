@@ -1,0 +1,73 @@
+class Node():
+    def __init__(self, value=None):
+        self.val = value
+        self.next = None
+
+def sorted_insertion(head, value):
+    new_node = Node(value)
+    if head == None:
+        head = new_node
+        return head
+    if value <= head.value:
+        new_node.next = head
+        head = new_node
+        return head
+    current = head
+    prev = None
+    while current and current.value < value:
+        prev = current
+        current = current.next
+    if current == None:
+        prev.next = new_node
+        new_node.next = None
+        return head
+    else:
+        prev.next = new_node
+        new_node.next = current
+        return head
+
+def add_list_at_the_end(main_head, head_wanted):
+    current = main_head
+    while current.next:
+        current = current.next
+    current.next = head_wanted
+    return main_head
+
+def separation(head):
+    head_1 = head_2 = head_3 = head_4 = head_5 = head_6 = head_7 = head_8 = head_9 = None
+
+    current = head
+    while current:
+        temp = (current.value) % 10
+        if temp == 1:
+            head_1 = sorted_insertion(head_1, temp)
+        elif temp == 2:
+            head_2 = sorted_insertion(head_2, temp)
+        elif temp == 3:
+            head_3 = sorted_insertion(head_3, temp)
+        elif temp == 4:
+            head_4 = sorted_insertion(head_4, temp)
+        elif temp == 5:
+            head_5 = sorted_insertion(head_5, temp)
+        elif temp == 6:
+            head_6 = sorted_insertion(head_6, temp)
+        elif temp == 7:
+            head_7 = sorted_insertion(head_7, temp)
+        elif temp == 8:
+            head_8 = sorted_insertion(head_8, temp)
+        else:  # temp ==9:
+            head_9 = sorted_insertion(head_9, temp)
+
+        current = current.next
+
+    new_head = head_1
+    add_list_at_the_end(new_head, head_2)
+    add_list_at_the_end(new_head, head_3)
+    add_list_at_the_end(new_head, head_4)
+    add_list_at_the_end(new_head, head_5)
+    add_list_at_the_end(new_head, head_6)
+    add_list_at_the_end(new_head, head_7)
+    add_list_at_the_end(new_head, head_8)
+    add_list_at_the_end(new_head, head_9)
+
+    return new_head
