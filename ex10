@@ -1,0 +1,51 @@
+class Node():
+    def __init__(self, value=None):
+        self.prev = None
+        self.value = value
+
+def getLen(last):
+    cnt = 0
+    while last != None:
+        cnt += 1
+        last = last.prev
+    return cnt
+
+def add(p, q): #Doubly LinkedList q and p point theit last's elements
+    head1 = p
+    l1 = getLen(p)
+    l2 = getLen(q)
+    if l2 > l1:
+        p, q = q, p  # p wskazuje na dluzsza liste
+    calosc = 0
+    while q != None:
+        s = p.value + q.value + calosc
+        if s > 9:
+            p.value = s % 10
+            calosc = 1
+        else:
+            calosc = 0
+            p.value = s
+        q = q.prev
+        p = p.prev
+    pre_last = None
+
+    while p != None:
+        s = calosc + p.value
+        if s > 9:
+            p.value = s % 10
+            calosc = 1
+        else:
+            p.value = s
+            calosc = 0
+        pre_last = p
+        p = p.prev
+        
+    if calosc == 1:
+        new_node = Node()
+        new_node.value = calosc
+        pre_last.prev = new_node
+        new_node.prev = None
+        return head1
+    else:
+        return head1
+
