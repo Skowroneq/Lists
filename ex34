@@ -1,0 +1,46 @@
+class Node:
+    def __init__(self, data=None):
+        self.data = data
+        self.next = None
+
+def elements_k(head, k):
+    was_removed = False
+    
+    if head == None:
+        return False
+    
+    last = head
+    curr = head.next
+    amount = {}
+    amount[head.data] = 1
+    
+    while curr != head:
+        if curr.data in amount:
+            amount[curr.data] += 1
+        else:
+            amount[curr.data] = 1
+        last = curr
+        curr = curr.next
+        
+    prev = None
+    curr = head
+    while curr.next != head:
+        if amount[curr.data] == k:
+            was_removed = True
+            if prev == None:
+                last.next = curr.next
+                head = last.next
+                curr = head
+            else:
+                prev.next = curr.next
+                curr = prev.next
+        else:
+            prev = curr
+            curr = curr.next
+            
+    if amount[curr.data] == k:
+        was_removed = True
+        prev.next = head
+        
+    print(was_removed)
+    return head
