@@ -1,0 +1,19 @@
+def find__length_loop(head):
+    slow_p = head
+    fast_p = head
+    loop = False
+    while slow_p and fast_p and fast_p.next:
+        slow_p = slow_p.next
+        fast_p = fast_p.next.next
+        if slow_p == fast_p:
+            loop = True
+            break
+    if loop:
+        counter = 0
+        curr = fast_p
+        while True:
+            counter += 1
+            curr = curr.next
+            if curr == fast_p:
+                return counter
+    return 0
