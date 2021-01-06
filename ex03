@@ -1,0 +1,69 @@
+def merge_two_sorted_llists_iterative(ll1, ll2):
+    p = ll1.head
+    q = ll2.head
+    s = None
+    new_head = None
+
+    if p == None:
+        return q
+    if q == None:
+        return p
+
+    # Set new head
+    if p.data <= q.data:
+        s = p
+        p = p.next
+    else:
+        s = q
+        q = q.next
+    new_head = s
+
+    while p and q:
+        if p.data <= q.data:
+            s.next = p
+            s = p
+            p = p.next
+        else:
+            s.next = q
+            s = q
+            q = q.next
+
+    if p == None:
+        s.next = q
+    if q == None:
+        s.next = p
+
+    return new_head
+
+
+def merge_two_sorted_llists_recursive(head_l1, head_l2):
+    if head_l1 == None:
+        return head_l2
+
+    if head_l2 == None:
+        return head_l1
+
+    # Set new_head
+    if head_l1.data <= head_l2:
+        s = head_l1
+        head_l1 = head_l1.next
+    else:
+        s = head_l2
+        head_l2 = head_l2.next
+    new_head = s
+
+    def recursion(p, q, s):
+        if p == None:
+            s.next = q
+            return new_head
+        if q == None:
+            s.next = p
+            return new_head
+        if p.data <= q.data:
+            s.next = p
+            return recursion(p.next, q, p)
+        else:
+            s.next = q
+            return recursion(p, q.next, q)
+
+    return recursion(head_l1, head_l2, s)
