@@ -1,0 +1,66 @@
+class Node():
+    def __init__(self, data=None):
+        self.next = None
+        self.data = data
+
+class linkedlist():
+    def __init__(self):
+        self.head = None
+
+    def display(self):
+        cur_node = self.head
+        i = 0
+        string = ''
+        while cur_node:
+            if cur_node.data > 0:
+                string += '+' + str(cur_node.data) + 'x^' + str(i) + ' '
+            elif cur_node.data < 0:
+                string += str(cur_node.data) + 'x^' + str(i) + ' '
+            cur_node = cur_node.next
+            i += 1
+        string += str(i)
+        print(string[:-2], end=' ')
+
+    def append(self, data):  # Add an element at the end of the linked_list
+        new_node = Node(data)
+
+        if self.head is None:
+            self.head = new_node
+            return
+
+        prev_node = None
+        cur_node = self.head
+        while cur_node:
+            prev_node = cur_node
+            cur_node = cur_node.next
+        prev_node.next = new_node
+
+def ex32(head_1, head_2):
+    new_head = None
+    p = new_head
+    curr_1 = head_1
+    curr_2 = head_2
+
+    while curr_1 and curr_2:
+        r = curr_1.data - curr_2.data
+        new_node = Node(r)
+        if p == None:
+            new_node.next = new_head
+            new_head = new_node
+            p = new_node
+        else:
+            p.next = new_node
+            p = new_node
+            p.next = None
+            
+        curr_1 = curr_1.next
+        curr_2 = curr_2.next
+        
+    if curr_1 == None:
+        p.next = curr_2
+        return new_head
+        
+    if curr_2 == None:
+        p.next = curr_1
+        return new_head
+
