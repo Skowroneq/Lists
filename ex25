@@ -1,0 +1,19 @@
+def elements_before_loop(head):
+    hash_table = {}
+    curr = head
+    while curr:
+        if curr in hash_table:
+            break
+        else:
+            hash_table[curr] = 1
+    if curr == None:
+        print('There is no any loop')
+        return head
+    else:
+        counter = 0
+        new_current = head
+        while new_current:
+            counter += 1
+            if new_current.next == curr:
+                return new_current
+            new_current = new_current.next
