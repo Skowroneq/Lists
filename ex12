@@ -1,0 +1,53 @@
+ ---------------------------- Na Klasie!
+class Node():
+    def __init__(self, string=None):
+        self.string = string
+        self.next = None
+
+
+class SetOfStrings():
+    def __init__(self):
+        self.head = None
+
+    def display(self):
+        curr = self.head
+        while curr:
+            print(curr.string)
+            curr = curr.next
+
+    def addition(self, string):
+        if self.head == None:
+            new_node = Node(string)
+            new_node.next = self.head
+            self.head = new_node
+            return
+            
+        prev = None
+        curr = self.head
+        while curr:
+            temp = curr.string
+            l1 = len(temp)
+            l2 = len(string)
+            l = min(l1, l2)
+            adding = False
+            for i in range(l):
+                if ord(string[i]) < ord(temp[i]):
+                    adding = True
+                    break
+            if dodajemy:
+                if prev == None: # we add before the list's head
+                    new_node = Node(string)
+                    new_node.next = self.head
+                    self.head = new_node
+                    return
+                else:
+                    new_node = Node(string)
+                    prev.next = new_node
+                    new_node.next = curr
+                    return
+                    
+            prev = curr
+            curr = curr.next
+
+        new_node = Node(string)
+        prev.next = new_node
